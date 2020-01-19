@@ -2,7 +2,6 @@
 //Date: August 2018
 #include <SPI.h>
 #include "RF24.h"
-#include "printf.h"
 #define  CE_PIN 7  
 #define  CSN_PIN 8
 
@@ -14,7 +13,7 @@
 
 RF24 radio(CE_PIN, CSN_PIN);
 
-byte addresses[][6] = {"test", "2Node"}; // Connection Pipes
+byte addresses[][6] = {"test", "test2"}; // Connection Pipes
 
 //packet of position and button data
 struct dataStruct {
@@ -51,10 +50,14 @@ void setup()
   radio.openWritingPipe(addresses[1]);
   radio.openReadingPipe(1, addresses[0]);
 
-}//--(end setup )---
+}
+
+//used for autostop
 unsigned long prev = 0;
 boolean found;
 int  count = 0;
+
+
 void loop()  
 {
 
